@@ -1,11 +1,11 @@
-## Steps to start the game
+## Rules of the game
 
  * Click on the tile to check if it's a pokeball
  * If it's not a blank tile appears
  * Game is over when all the 8 pokeballs are found
  * You score is calculated based on number of question marks left.
 
-## Technologies used 
+## Technologies used
 
 * Node Js
 * React Js
@@ -13,4 +13,10 @@
 * chai
 * Istanbul
 
-## start the game using ``` npm start ```
+## Steps to start the game
+
+* node, git installed
+* clone the project
+* run ``` npm install ```
+* run ``` npm start ```
+* open browser, browse ```localhost:5555 ```
