@@ -1,0 +1,28 @@
+td {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  padding: 5px;
+}
+.question {
+  background: url('./icons/help.png') no-repeat;
+}
+
+.pokeball{
+  background: url('./icons/pokeball.png') no-repeat;
+}
+.blank{
+  background: white;
+}
+.rightArrow{
+  background: url('./icons/arrow-right-thick.png') no-repeat;
+}
+.leftArrow{
+  background: url('./icons/arrow-left-thick.png') no-repeat;
+}
+.upArrow{
+  background: url('./icons/arrow-up-thick.png') no-repeat;
+}
+.downArrow{
+  background: url('./icons/arrow-down-thick.png') no-repeat;
+}
