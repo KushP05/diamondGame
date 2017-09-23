@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha --compilers js:babel-core/register",
-    "test-coverage": "babel-node ./node_modules/.bin/babel-istanbul cover _mocha test/*.spec.js"
+    "test-coverage": "babel-node ./node_modules/.bin/babel-istanbul cover _mocha test/*.spec.js",
+    "start": "node src/server.js"
   },
   "author": "",
   "license": "ISC",
