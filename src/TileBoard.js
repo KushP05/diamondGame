@@ -5,7 +5,12 @@ import Tile from './Tile';
 class TileBoard extends React.Component {
   constructor() {
     super();
-    this.diamondPositions = [2,3,23,43,44,22,38,55];
+    this.diamondPositions = []
+    while(this.diamondPositions.length <= 8){
+        var randomnumber = Math.ceil(Math.random()*64)
+        if(this.diamondPositions.indexOf(randomnumber) > -1) continue;
+        this.diamondPositions[this.diamondPositions.length] = randomnumber;
+    }
     this.setTileStatus = this.setTileStatus.bind(this);
     this.checkWhichArrow = this.checkWhichArrow.bind(this);
     this.currentArrowPos = null;
