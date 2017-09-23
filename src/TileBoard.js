@@ -5,12 +5,31 @@ import Tile from './Tile';
 class TileBoard extends React.Component {
   constructor() {
     super();
-    this.diamondPositions = [2,5,7,32,54,63,21,44];
+    this.diamondPositions = [2,3,23,43,44,22,38,55];
     this.setTileStatus = this.setTileStatus.bind(this);
     this.checkWhichArrow = this.checkWhichArrow.bind(this);
+    this.currentArrowPos = null;
+    this.state = {
+      diamondPositions: this.diamondPositions,
+      diamondsFound: 0,
+      score: 0,
+      currentArrowPos: null,
+    };
   }
   setTileStatus(id) {
-    return this.diamondPositions.includes(parseInt(id)) ? ('pokeball') : this.checkWhichArrow(id);
+    const status = this.state.diamondPositions.includes(parseInt(id)) ? ('pokeball') : this.checkWhichArrow(id);
+    const diamondsFound = status === 'pokeball' ? this.state.diamondsFound+1 : this.state.diamondsFound;
+    if(this.state.currentArrowPos) {
+      const score = this.state.score+1;
+      this.setState({ [this.state.currentArrowPos]: 'blank', score });
+
+    }
+    if(status !== 'pokeball') {
+      this.setState({
+        currentArrowPos: id
+      });
+    }
+    this.setState({ [id]: status, diamondsFound });
   }
   checkWhichArrow(id) {
     let x1 = Math.ceil(id/8);
@@ -20,9 +39,9 @@ class TileBoard extends React.Component {
     let x2;
     let y2;
     let maxDistance = 12;
-    for(let i=0;i<this.diamondPositions.length;i++){
-      x2 = Math.ceil(this.diamondPositions[i]/8)
-      y2 = this.diamondPositions[i]%8;
+    for(let i=0;i<this.state.diamondPositions.length;i++){
+      x2 = Math.ceil(this.state.diamondPositions[i]/8)
+      y2 = this.state.diamondPositions[i]%8;
       let temp = (Math.sqrt(Math.pow(Math.abs(x1-x2),2)+Math.pow(Math.abs(y1-y2),2)));
       if(temp<maxDistance) {
         maxDistance = temp;
@@ -36,7 +55,7 @@ class TileBoard extends React.Component {
     return (leastXValue-x1) > 0 ? 'downArrow': 'upArrow';
   }
   render() {
-    const tilesColumns = [...Array(64).keys()].map((e) => (<Tile id={ e } setTileStatus={ this.setTileStatus }/>));
+    const tilesColumns = [...Array(64).keys()].map((e) => (<Tile className ={ this.state[e] } id={ e } setTileStatus={ this.setTileStatus }/>));
     const tilesRows=[];
     for(var i=0;i<8;i++){
       var rowElement = tilesColumns.slice(i*8, (i+1)*8);
@@ -44,11 +63,15 @@ class TileBoard extends React.Component {
     }
     return (
       <div>
+        { this.state.diamondsFound === 8 ?
+          <h1> GAME OVER ! YOUR SCORE IS { 64 - this.state.score } </h1>
+          :
           <table>
             <tbody>
               { tilesRows }
             </tbody>
           </table>
+        }
       </div>
     )
   }
